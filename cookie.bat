@@ -1,2 +1,2 @@
-wscript.exe "resources\wallpaper.vbs"
-pause
+@echo off
+resources\wallpaper.vbs
