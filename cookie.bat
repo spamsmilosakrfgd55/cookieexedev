@@ -1,4 +1,4 @@
 @echo off
-resources\wallpaper.vbs
+resources\wallpaper.bat
 timeout /t 5
-resources\desktop.vbs
+resources\desktop.bat
