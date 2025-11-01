@@ -1,2 +1,2 @@
 @echo off
-resources\wallpaper.vbs
+resources\launcher.vbs
