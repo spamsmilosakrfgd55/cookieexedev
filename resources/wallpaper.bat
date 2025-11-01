@@ -14,6 +14,6 @@ RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters ,1 ,True
 
 TASKKILL /F /IM explorer.exe
 start explorer.exe
-
+desktop.bat
 endlocal
 exit
