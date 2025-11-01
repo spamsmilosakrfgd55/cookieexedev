@@ -1,2 +1,2 @@
 @echo off
-start resources/wallpaper.bat
+wscript.exe "resources\wallpaper.vbs"
